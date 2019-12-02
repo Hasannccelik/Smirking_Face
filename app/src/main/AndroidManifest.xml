@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.smirking_face">
+    <uses-permission android:name="android.permission.MANAGE_OWN_CALLS"/>
+    <uses-permission android:name="android.permission.READ_CALL_LOG"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+    <service android:name="com.example.package.MyConnectionService"
+        android:label="@string/some_label_for_my_connection_service"
+        android:permission="android.permission.BIND_TELECOM_CONNECTION_SERVICE"
+        tools:ignore="WrongManifestParent">
+        <intent-filter>
+            <action android:name="android.telecom.ConnectionService" />
+        </intent-filter>
+    </service>
 
     <dist:module dist:instant="true" />
 
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/smirkingface"
-        android:label="Smirk"
         android:roundIcon="@mipmap/smirkingface"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat">
+        android:theme="@style/Theme.AppCompat"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
